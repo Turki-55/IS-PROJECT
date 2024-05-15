@@ -1,0 +1,28 @@
+{%extends 'base.html' %}
+{% block title%} My Events{%endblock%}
+{% block content %} 
+
+<div class="container mt-5">
+    <h1>Registered Events</h1>
+    <ul class="list-group">
+        {% for registration in registered_events %}
+            <li class="list-group-item  my-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>{{ registration.event.name }}</h5>
+                        <p>Date: {{ registration.event.date }} | Time: {{ registration.event.time }} | Location: {{ registration.event.location }}</p>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <form method="post" action="{% url 'cancel-registration' registration.event.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Cancel Registration</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}

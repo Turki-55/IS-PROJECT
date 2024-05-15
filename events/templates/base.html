@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Events App {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+    <style>
+  
+      .jumbotron {
+          background-image: url('path/to/background-image.jpg');
+          background-size: cover;
+          background-position: center;
+          color: #000000;
+          text-align: center;
+          padding: 100px 0;
+          margin-bottom: 0;
+      }
+      .jumbotron h1 {
+          font-size: 3.5rem;
+      }
+      .jumbotron p {
+          font-size: 1.5rem;
+      }
+      .btn-get-started {
+          background-color: #007bff;
+          border-color: #007bff;
+      }
+  </style>
+  </head>
+  <body>
+    
+    <nav  class="navbar bg-light shodow-sm">
+        <div class="container-fluid">
+          {% if user.is_authenticated%}
+            <a class="navbar-brand " href="{%url 'event_list' %}">
+              {% load static %}
+                <img src="{% static 'icons8-event-64.png' %}" alt="Bootstrap" width="30" height="30">
+                <span class="fw-bold">Eventor</span>
+              </a>
+            {% else %}
+            <a class="navbar-brand" href="{%url 'home' %}">
+              {% load static %}
+                <img src="{% static 'icons8-event-64.png' %}" alt="Bootstrap" width="30" height="30">
+                <span class="fw-bold">Eventor</span>
+              </a>
+            {% endif %}
+          <div class="d-flex align-items-center" >
+            {% if user.is_authenticated%}
+             Welcome  <span class="text-primary ms-2">{{user.username}}</span>
+           <a href="{%url 'create-event' %}"  class="btn btn-primary mx-2 btn-sm   mx-4" >Create Event</a>
+            <form action="/members/logout/" method="post">
+              {% csrf_token %}
+                  <button type="submit" class="btn btn-danger mx-2 btn-sm" >Logout</button>
+            </form>
+        <div class="dropdown">
+  <button class="btn dropdown-toggle rounded-circle btn-sm me-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src="{% static 'icons8-user-96.png' %}" class="rounded-circle" alt="User Icon" w="30" height="30">
+  </button>
+  <ul class="dropdown-menu me-3">
+    <li><a class="dropdown-item" href="{%url 'user-registered-events' %}" >My Events</a></li>
+    <li><a class="dropdown-item" href="{%url 'edit_profile' %}" >Profile</a></li> 
+  </ul>
+</div>
+            {% else %}
+            <a href="{%url 'login' %}"  class="text-primary fw-bold text-decoration-none  h6 mx-4" >Login</a>
+            <a href="{%url 'register' %}" class="text-primary fw-bold text-decoration-none h6" >Register</a>
+           
+            {% endif %}
+
+          </div>
+        </div>
+      </nav>
+    <div class="container my-4">
+    </nav>
+    {% block content %}
+    
+    {% endblock %}  
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>  </body>
+</html>
