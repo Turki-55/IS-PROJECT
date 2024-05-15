@@ -1,0 +1,23 @@
+{%extends 'base.html' %}
+{% block title%} Register {%endblock%}
+{% block content %} 
+<div class="d-flex justify-content-center my-4 ">
+    <a class="navbar-brand align-items-center d-flex" href="{% url 'event_list' %}">
+        {% load static %}
+        <img src="{% static 'icons8-event-64.png' %}" alt="Bootstrap" width="40" height="40">
+        <h5 class="mx-2">Eventor</h5>
+    </a>
+</div>
+
+<h1 class="my-2">Register</h1>
+
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Sign Up</button>
+    </form>
+    <p class="my-2">Don't have an Account? <a href="{%url 'login' %}">Login</a></p>
+</div>
+
+{% endblock %}
