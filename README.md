@@ -8,7 +8,9 @@ download from python repository
 
 Django Installed
 $ python -m pip install Django
+
 also toolbar
+
 python -m pip install django-debug-toolbar
 
 ## User
